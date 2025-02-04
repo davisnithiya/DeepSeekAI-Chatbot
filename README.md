@@ -16,16 +16,21 @@ This project is a chatbot application built using Spring Boot that interacts wit
 
 
 ### AI Model (Python API)
-DeepSeek AI for SQL query generation
-Model: deepseek-ai/deepseek-coder-1.3b-instruct
-Repository: DeepSeek AI on Hugging Face
+
+**DeepSeek AI for SQL query generation**  
+Model: `deepseek-ai/deepseek-coder-1.3b-instruct`  
+Repository: [DeepSeek AI on Hugging Face](https://huggingface.co/deepseek-ai)  
 Flask (for hosting Python API)
 
 ### Python API Setup (DeepSeek AI Integration)
-1. Install Python Dependencies
-Ensure you have Python 3.8+ installed. Then, install required libraries:
-pip install flask transformers torch
-2. Start Python API
-Run the Python Flask API that communicates with DeepSeek AI:
+
+1. **Install Python Dependencies**  
+Ensure you have Python 3.8+ installed. Then, install required libraries:  
+
+2. **Start Python API**  
+Run the Python Flask API that communicates with DeepSeek AI:  
+
+This should start a local API at `http://localhost:5001/generate_sql`.
+
 python flask_api.py
 This should start a local API at http://localhost:5001/generate_sql.
