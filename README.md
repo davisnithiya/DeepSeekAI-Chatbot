@@ -3,8 +3,8 @@
 This project is a chatbot application built using Spring Boot that interacts with a Python-based AI model (DeepSeek AI) to generate and execute SQL queries. The chatbot takes user queries in natural language and converts them into SQL commands, fetching results from a MySQL database.
 
 ### Features
-Chatbot UI: Simple web interface for user interaction.
-Natural Language to SQL Conversion: Uses DeepSeek Coder 1.3B Instruct to generate SQL queries.
+1. **Chatbot UI: Simple web interface for user interaction.
+2.Natural Language to SQL Conversion: Uses DeepSeek Coder 1.3B Instruct to generate SQL queries.
 Spring Boot Backend: Manages user requests and database execution.
 Python API Integration: Sends user queries to a Python service for SQL generation.
 MySQL Database: Stores student data and processes SQL queries.
