@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chatbot</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            text-align: center;
+        }
+        .chat-container {
+            max-width: 600px;
+            margin: 50px auto;
+            padding: 20px;
+            background: white;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            box-shadow: 2px 2px 10px rgba(0,0,0,0.1);
+        }
+        .chat-box {
+            height: 300px;
+            overflow-y: auto;
+            border: 1px solid #ccc;
+            padding: 10px;
+            margin-bottom: 10px;
+            text-align: left;
+            background: #fff;
+            border-radius: 4px;
+        }
+        .input-area {
+            display: flex;
+        }
+        .input-area input {
+            flex: 1;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 16px;
+        }
+        .input-area button {
+            padding: 10px 15px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+            border-radius: 4px;
+            margin-left: 5px;
+        }
+        .input-area button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="chat-container">
+        <h2>Chatbot</h2>
+        <div id="chat-box" class="chat-box"></div>
+        <div class="input-area">
+            <input type="text" id="user-input" placeholder="Type your query..." onkeypress="handleKeyPress(event)">
+            <button onclick="sendMessage()">Send</button>
+        </div>
+    </div>
+
+    <script>
+        function sendMessage() {
+            const userInputField = document.getElementById('user-input');
+            const userInput = userInputField.value.trim();
+            if (userInput !== '') {
+                // Display user input
+                const chatBox = document.getElementById('chat-box');
+                const userMessage = document.createElement('p');
+                userMessage.textContent = "You: " + userInput;
+                chatBox.appendChild(userMessage);
+
+                // Send the message to the Spring Boot backend
+                fetch('/chatbot/ask', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ query: userInput })
+                })
+                .then(response => response.json())
+                .then(data => {
+                    // Display the bot response in a <pre> tag to preserve formatting
+                    const botMessage = document.createElement('pre');
+                    botMessage.textContent = "Bot: " + data.response;
+                    chatBox.appendChild(botMessage);
+                    chatBox.scrollTop = chatBox.scrollHeight;  // Auto-scroll
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    const botMessage = document.createElement('p');
+                    botMessage.textContent = "Bot: Sorry, there was an error.";
+                    chatBox.appendChild(botMessage);
+                });
+
+                // Clear input field and refocus
+                userInputField.value = '';
+                userInputField.focus();
+            }
+        }
+
+        function handleKeyPress(event) {
+            if (event.key === "Enter") {
+                sendMessage();
+            }
+        }
+    </script>
+
+</body>
+</html>

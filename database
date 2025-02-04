@@ -1,0 +1,22 @@
+CREATE DATABASE school;
+
+USE school;
+
+CREATE TABLE students (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(255),
+    email VARCHAR(255),
+    course VARCHAR(255)
+);
+
+
+USE school;
+
+INSERT INTO students (id, name, email, course) 
+VALUES 
+(1, 'John Doe', 'john.doe@example.com', 'Computer Science'),
+(2, 'Jane Smith', 'jane.smith@example.com', 'Mathematics'),
+(3, 'Alice Johnson', 'alice.johnson@example.com', 'Physics'),
+(4, 'Bob Brown', 'bob.brown@example.com', 'Engineering');
+
+select * from students;
